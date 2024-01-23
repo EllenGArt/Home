@@ -15,20 +15,26 @@
 
     .moving-object {
       position: absolute;
-      transition: transform 5s ease-in-out;
       cursor: grab;
       user-select: none;
-      user-drag: element;
+      user-drag: none;
+      transform-origin: top left;
     }
   </style>
-  <title>Ellen test</title>
+  <title> ellen test </title>
 </head>
 <body>
   <div class="background-container"></div>
   <div id="object1" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 1"></div>
   <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 2"></div>
-  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 2"></div>
-  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 2"></div>
+  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 3"></div>
+  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 4"></div>
+  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 5"></div>
+  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 6"></div>
+  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 7"></div>
+  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 8"></div>
+  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 9"></div>
+  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 10"></div>
 
   <script>
     const objects = document.querySelectorAll('.moving-object');
@@ -36,18 +42,20 @@
     objects.forEach((object, index) => {
       let isDragging = false;
       let offsetX, offsetY;
+      let transitionDuration = 5; // Initial transition duration in seconds
 
-      const initialDelay = index * 700; // Adjust the delay for each object
+      const initialDelay = index * 10000; // Adjust the delay for each object
 
       setTimeout(() => {
-        // Set initial random positions for each object
-        const maxX = window.innerWidth - object.clientWidth;
-        const maxY = window.innerHeight - object.clientHeight;
+        const startLocations = [
+          { left: 100, top: 100 }, // Adjust the coordinates for the first object
+          { left: 200, top: 200 }  // Adjust the coordinates for the second object
+        ];
 
-        const initialX = Math.random() * maxX;
-        const initialY = Math.random() * maxY;
+        const startLocation = startLocations[index];
 
-        object.style.transform = `translate(${initialX}px, ${initialY}px)`;
+        object.style.transition = `transform ${transitionDuration}s ease-in-out`;
+        object.style.transform = `translate(${startLocation.left}px, ${startLocation.top}px)`;
 
         object.addEventListener('mousedown', startDrag);
         object.addEventListener('touchstart', startDrag);
@@ -65,7 +73,8 @@
           offsetY = clientY - object.getBoundingClientRect().top;
 
           // Adjust the transition time when dragging
-          object.style.transition = 'transform 0.1s ease-in-out';
+          transitionDuration = 0.1;
+          object.style.transition = `transform ${transitionDuration}s ease-in-out`;
 
           object.style.cursor = 'grabbing';
         }
@@ -81,25 +90,29 @@
         function stopDrag() {
           isDragging = false;
 
-          // Restore the transition time when not dragging
-          object.style.transition = 'transform 5s ease-in-out';
+          // Gradually transition to the new position when not dragging
+          transitionDuration = 6;
+          object.style.transition = `transform ${transitionDuration}s ease-in-out`;
 
           object.style.cursor = 'grab';
         }
 
         function moveObjectRandomly() {
           if (!isDragging) {
-            const maxX = window.innerWidth - object.clientWidth;
-            const maxY = window.innerHeight - object.clientHeight;
+            // Pause for 1 second before moving to the next position
+            setTimeout(() => {
+              const maxX = window.innerWidth - object.clientWidth;
+              const maxY = window.innerHeight - object.clientHeight;
 
-            const newX = Math.random() * maxX;
-            const newY = Math.random() * maxY;
+              const newX = Math.random() * maxX;
+              const newY = Math.random() * maxY;
 
-            object.style.transform = `translate(${newX}px, ${newY}px)`;
+              object.style.transform = `translate(${newX}px, ${newY}px)`;
+            }, 500);
           }
 
-          // Adjust the interval (currently set to 5 seconds) for more frequent movement
-          setTimeout(moveObjectRandomly, 5000);
+          // Adjust the interval (currently set to 6 seconds) for more frequent movement
+          setTimeout(moveObjectRandomly, 6000);
         }
 
         // Initial move on page load
