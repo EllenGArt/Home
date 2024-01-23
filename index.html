@@ -8,12 +8,75 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      background-image: url('https://unblast.com/wp-content/uploads/2021/01/Space-Background-Images.jpg'); /* Replace with your background image URL */
+      background-image: url('https://unblast.com/wp-content/uploads/2021/01/Space-Background-Images.jpg'); 
       background-size: cover;
       background-repeat: no-repeat;
     }
 
-    .moving-object1 {
+    .object1 {
+      position: 150px 150px;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      transform-origin: top right;
+      
+    .object2{
+      position: 100px 100px;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      transform-origin: top right;
+      
+    .object3 {
+      position: 150px 150px;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      transform-origin: top left;
+      
+    .object4 {
+      position: 150px 150px;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      transform-origin: top left;
+      
+    .object5 {
+      position: 150px 150px;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      transform-origin: top left;
+      
+    .object6 {
+      position: 150px 150px;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      transform-origin: top left;
+      
+    .object7 {
+      position: 150px 150px;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      transform-origin: top left;
+      
+    .object8 {
+      position: 150px 150px;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      transform-origin: top left;
+      
+    .object9 {
+      position: 150px 150px;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      transform-origin: top left;
+      
+    .object10 {
       position: 150px 150px;
       cursor: pointer;
       user-select: none;
@@ -21,36 +84,42 @@
       transform-origin: top left;
     }
   </style>
-  <title>Ellen's Test</title>
+  <title>Ellen's Test Page</title>
 </head>
 <body>
+
   <div class="background-container"></div>
+  
   <div id="object1" class="moving-object1" onclick="window.open('https://www.youtube.com/watch?v=fueRUi5AWWQ', '_blank')"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 1"></div>
- 
- 
- 
- 
- 
+  
  <div id="object2" class="moving-object" onclick="window.open('https://www.youtube.com/watch?v=8tqJx86xQJQ', '_blank')"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 2"></div>
+ 
   <div id="object3" class="moving-object" onclick="window.open('https://www.youtube.com/watch?v=dMapmlUwerw', '_blank')"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 3"></div>
+  
   <div id="object4" class="moving-object" onclick="window.open('https://www.youtube.com/watch?v=A7IMBnMU5a4', '_blank')"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 4"></div>
+  
   <div id="object5" class="moving-object" onclick="window.open('https://www.youtube.com/watch?v=IYUgduOeXuA', '_blank')"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 5"></div>
+  
   <div id="object6" class="moving-object" onclick="window.open('https://www.youtube.com/watch?v=GBwELzvnrQg', '_blank')"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 6"></div>
+  
   <div id="object7" class="moving-object" onclick="window.open('https://www.youtube.com/watch?v=azm1WjeV8o8', '_blank')"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 7"></div>
+  
   <div id="object8" class="moving-object" onclick="window.open('https://www.youtube.com/watch?v=qu4xsHkdTzU', '_blank')"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 8"></div>
+  
   <div id="object9" class="moving-object" onclick="window.open('https://www.youtube.com/watch?v=qRuNxHqwazs', '_blank')"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 9"></div>
+  
   <div id="object10" class="moving-object" onclick="window.open('https://www.youtube.com/watch?v=EShUeudtaFg', '_blank')"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 10"></div>
 
   <script>
     const objects = document.querySelectorAll('.moving-object');
 
     objects.forEach((object, index) => {
-      let transitionDuration = 4; // Initial transition duration in seconds
+      let transitionDuration = 6; // Initial transition duration in seconds
 
-      const initialDelay = index * 10000; // Adjust the delay for each object
+      const initialDelay = index * 10303; // Adjust the delay for each object
 
       setTimeout(() => {
-        object.style.transition = `transform ${transitionDuration}s ease-in-out`;
+        object.style.transition = `transform ${transitionDuration}s ease-out`;
 
         function moveObjectRandomly() {
           const maxX = window.innerWidth - object.clientWidth;
