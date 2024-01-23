@@ -15,16 +15,19 @@
 
     .moving-object {
       position: absolute;
-      transition: transform 1s ease-in-out;
+      transition: transform 5s ease-in-out;
       cursor: grab;
       user-select: none;
+      user-drag: element;
     }
   </style>
-  <title>Multiple Draggable and Moving Objects with Background</title>
+  <title>Ellen test</title>
 </head>
 <body>
   <div class="background-container"></div>
   <div id="object1" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 1"></div>
+  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 2"></div>
+  <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 2"></div>
   <div id="object2" class="moving-object"><img src="https://cdn.cyberduck.io/img/cryptomator_256.png" alt="Image 2"></div>
 
   <script>
@@ -60,6 +63,10 @@
           const { clientX, clientY } = e.type.startsWith('touch') ? e.touches[0] : e;
           offsetX = clientX - object.getBoundingClientRect().left;
           offsetY = clientY - object.getBoundingClientRect().top;
+
+          // Adjust the transition time when dragging
+          object.style.transition = 'transform 0.1s ease-in-out';
+
           object.style.cursor = 'grabbing';
         }
 
@@ -73,6 +80,10 @@
 
         function stopDrag() {
           isDragging = false;
+
+          // Restore the transition time when not dragging
+          object.style.transition = 'transform 5s ease-in-out';
+
           object.style.cursor = 'grab';
         }
 
@@ -87,8 +98,8 @@
             object.style.transform = `translate(${newX}px, ${newY}px)`;
           }
 
-          // Adjust the interval (currently set to 2 seconds) for more frequent movement
-          setTimeout(moveObjectRandomly, 1000);
+          // Adjust the interval (currently set to 5 seconds) for more frequent movement
+          setTimeout(moveObjectRandomly, 5000);
         }
 
         // Initial move on page load
