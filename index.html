@@ -43,10 +43,10 @@
     objects.forEach((object, index) => {
       let transitionDuration = 5; // Initial transition duration in seconds
 
-      const initialDelay = index * 10000; // Adjust the delay for each object
+      const initialDelay = index * 10300; // Adjust the delay for each object
 
       setTimeout(() => {
-        object.style.transition = `transform ${transitionDuration}s ease-in-out`;
+        object.style.transition = `transform ${transitionDuration}s ease-out`;
 
         function moveObjectRandomly() {
           const maxX = window.innerWidth - object.clientWidth;
@@ -57,11 +57,10 @@
 
           object.style.transform = `translate(${newX}px, ${newY}px)`;
 
-          // Adjust the interval (currently set to 6 seconds) for more frequent movement
+          // Adjust the interval for more frequent movement
           setTimeout(moveObjectRandomly, 6000);
         }
 
-        // Initial move on page load
         moveObjectRandomly();
       }, initialDelay);
     });
