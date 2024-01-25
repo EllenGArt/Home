@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +20,8 @@
 
     .objects-container {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* Two columns */
+      grid-template-columns: repeat(4, 1fr); /* Four columns */
+      grid-template-rows: repeat(3, 1fr); /* Three rows */
       grid-gap: 10px; /* Adjust the gap between objects */
     }
 
@@ -43,6 +43,48 @@
       grid-column: 2; /* Adjust the starting column for object 2 */
       grid-row: 1; /* Adjust the starting row for object 2 */
     }
+
+    /* Additional objects */
+    .object3 {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .object4 {
+      grid-column: 4;
+      grid-row: 1;
+    }
+
+    .object5 {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .object6 {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .object7 {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    .object8 {
+      grid-column: 4;
+      grid-row: 2;
+    }
+
+    .object9 {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    .object10 {
+      grid-column: 2;
+      grid-row: 3;
+    }
+
   </style>
   <title>Ellen's Test Page</title>
 </head>
@@ -57,6 +99,32 @@
     <div class="moving-object object2" onclick="window.open('https://www.youtube.com/watch?v=8tqJx86xQJQ', '_blank')">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 2">
     </div>
+
+    <!-- Additional objects -->
+    <div class="moving-object object3" onclick="window.open('https://example.com', '_blank')">
+      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 3">
+    </div>
+    <div class="moving-object object4" onclick="window.open('https://example.com', '_blank')">
+      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 4">
+    </div>
+    <div class="moving-object object5" onclick="window.open('https://example.com', '_blank')">
+      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 5">
+    </div>
+    <div class="moving-object object6" onclick="window.open('https://example.com', '_blank')">
+      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 6">
+    </div>
+    <div class="moving-object object7" onclick="window.open('https://example.com', '_blank')">
+      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 7">
+    </div>
+    <div class="moving-object object8" onclick="window.open('https://example.com', '_blank')">
+      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 8">
+    </div>
+    <div class="moving-object object9" onclick="window.open('https://example.com', '_blank')">
+      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 9">
+    </div>
+    <div class="moving-object object10" onclick="window.open('https://example.com', '_blank')">
+      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 10">
+    </div>
   </div>
 
   <script>
@@ -70,24 +138,22 @@
       });
     };
 
- function moveObjectRandomly(object) {
-  const boundary = 100; // Set your desired boundary
+    function moveObjectRandomly(object) {
+      const boundary = 100; // Set your desired boundary
+      const maxX = window.innerWidth - object.clientWidth - boundary;
+      const maxY = window.innerHeight - object.clientHeight - boundary;
 
-  const maxX = window.innerWidth - object.clientWidth - boundary;
-  const maxY = window.innerHeight - object.clientHeight - boundary;
+      const randomX = Math.random();
+      const randomY = Math.random();
 
-  const randomX = Math.random();
-  const randomY = Math.random();
+      const newX = randomX * maxX + boundary / 2;
+      const newY = randomY * maxY + boundary / 2;
 
-  const newX = randomX * maxX + boundary / 2;
-  const newY = randomY * maxY + boundary / 2;
+      object.style.transform = `translate(${newX}px, ${newY}px)`;
 
-  object.style.transform = `translate(${newX}px, ${newY}px)`;
-
-  setTimeout(() => {
-    moveObjectRandomly(object);
-  }, 10000);
-
+      setTimeout(() => {
+        moveObjectRandomly(object);
+      }, 10000); // Adjust the duration for each object
     }
   </script>
 </body>
