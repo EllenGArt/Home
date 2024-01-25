@@ -79,12 +79,12 @@
 
     .object9 {
       grid-column: 1;
-      grid-row: 1;
+      grid-row: 3;
     }
 
     .object10 {
       grid-column: 2;
-      grid-row: 1;
+      grid-row: 3;
     }
 
   </style>
@@ -141,22 +141,26 @@
     };
 
     function moveObjectRandomly(object) {
-      const boundary = 100; // Set your desired boundary
-      const maxX = window.innerWidth - object.clientWidth - boundary;
-      const maxY = window.innerHeight - object.clientHeight - boundary;
+  const boundary = 300; // Set your desired boundary
+  const maxX = window.innerWidth - object.clientWidth - boundary;
+  const maxY = window.innerHeight - object.clientHeight - boundary;
 
-      const randomX = Math.random();
-      const randomY = Math.random();
+  const randomX = Math.random();
+  const randomY = Math.random();
 
-      const newX = randomX * maxX + boundary / 2;
-      const newY = randomY * maxY + boundary / 2;
+  const newX = randomX * maxX + boundary / 2;
+  const newY = randomY * maxY + boundary / 2;
 
-      object.style.transform = `translate(${newX}px, ${newY}px)`;
+  // Ensure the object stays within the viewport boundaries
+  const boundedX = Math.min(Math.max(newX, boundary / 2), maxX);
+  const boundedY = Math.min(Math.max(newY, boundary / 2), maxY);
 
-      setTimeout(() => {
-        moveObjectRandomly(object);
-      }, 10000); // Adjust the duration for each object
-    }
+  object.style.transform = `translate(${boundedX}px, ${boundedY}px)`;
+
+  setTimeout(() => {
+    moveObjectRandomly(object);
+  }, 10000); // Adjust the duration for each object
+}
   </script>
 </body>
 </html>
