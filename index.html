@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,9 +29,9 @@
       cursor: pointer;
       user-select: none;
       user-drag: none;
-      transform-origin: top right;
+      transform-origin: top left;
       z-index: 1;
-      transition: transform 6s ease-out;
+      transition: transform 10s ease-out;
     }
 
     .object1 {
@@ -61,27 +62,30 @@
   <script>
     const objects = document.querySelectorAll('.moving-object');
 
-    objects.forEach((object, index) => {
+    window.onload = function() {
+      objects.forEach((object, index) => {
+        setTimeout(() => {
+          moveObjectRandomly(object);
+        }, index * 2053); // Adjust the delay for each object
+      });
+    };
+
+    function moveObjectRandomly(object) {
+      const maxX = window.innerWidth - object.clientWidth;
+      const maxY = window.innerHeight - object.clientHeight;
+
+      const randomX = Math.random();
+      const randomY = Math.random();
+
+      const newX = randomX * maxX;
+      const newY = randomY * maxY;
+
+      object.style.transform = `translate(${newX}px, ${newY}px)`;
+
       setTimeout(() => {
-        function moveObjectRandomly() {
-          const maxX = window.innerWidth - object.clientWidth;
-          const maxY = window.innerHeight - object.clientHeight;
-
-          const randomX = (Math.random() - 0.5) * 2;
-          const randomY = (Math.random() - 0.5) * 2;
-
-          const newX = randomX * maxX;
-          const newY = randomY * maxY;
-
-          object.style.transform = `translate(${newX}px, ${newY}px)`;
-
-          setTimeout(moveObjectRandomly, 1000);
-        }
-
-        moveObjectRandomly();
-      }, index * 1000); // Adjust the delay for each object
-    });
+        moveObjectRandomly(object);
+      }, 10000);
+    }
   </script>
 </body>
 </html>
-
