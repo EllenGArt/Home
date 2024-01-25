@@ -46,7 +46,6 @@
       grid-row: 1; /* Adjust the starting row for object 2 */
     }
 
-    /* Additional objects */
     .object3 {
       grid-column: 3;
       grid-row: 1;
@@ -75,16 +74,6 @@
     .object8 {
       grid-column: 4;
       grid-row: 2;
-    }
-
-    .object9 {
-      grid-column: 1;
-      grid-row: 1;
-    }
-
-    .object10 {
-      grid-column: 2;
-      grid-row: 1;
     }
 
   </style>
@@ -119,12 +108,6 @@
     <div class="moving-object object8" onclick="window.open('https://example.com', '_blank')">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 8">
     </div>
-    <div class="moving-object object9" onclick="window.open('https://example.com', '_blank')">
-      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 9">
-    </div>
-    <div class="moving-object object10" onclick="window.open('https://example.com', '_blank')">
-      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 10">
-    </div>
   </div>
 
   <script>
@@ -134,7 +117,7 @@
       objects.forEach((object, index) => {
         setTimeout(() => {
           moveObjectRandomly(object);
-        }, index * 3053); // Adjust the delay for each object
+        }, index * 6053); // Adjust the delay for each object
       });
     };
 
