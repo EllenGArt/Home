@@ -136,12 +136,12 @@
       objects.forEach((object, index) => {
         setTimeout(() => {
           moveObjectRandomly(object);
-        }, index * 2053); // Adjust the delay for each object
+        }, index * 3053); // Adjust the delay for each object
       });
     };
 
     function moveObjectRandomly(object) {
-  const boundary = 300; // Set your desired boundary
+  const boundary = 500; // Set your desired boundary
   const maxX = window.innerWidth - object.clientWidth - boundary;
   const maxY = window.innerHeight - object.clientHeight - boundary;
 
