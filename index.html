@@ -70,21 +70,24 @@
       });
     };
 
-    function moveObjectRandomly(object) {
-      const maxX = window.innerWidth - object.clientWidth;
-      const maxY = window.innerHeight - object.clientHeight;
+ function moveObjectRandomly(object) {
+  const boundary = 100; // Set your desired boundary
 
-      const randomX = Math.random();
-      const randomY = Math.random();
+  const maxX = window.innerWidth - object.clientWidth - boundary;
+  const maxY = window.innerHeight - object.clientHeight - boundary;
 
-      const newX = randomX * maxX;
-      const newY = randomY * maxY;
+  const randomX = Math.random();
+  const randomY = Math.random();
 
-      object.style.transform = `translate(${newX}px, ${newY}px)`;
+  const newX = randomX * maxX + boundary / 2;
+  const newY = randomY * maxY + boundary / 2;
 
-      setTimeout(() => {
-        moveObjectRandomly(object);
-      }, 10000);
+  object.style.transform = `translate(${newX}px, ${newY}px)`;
+
+  setTimeout(() => {
+    moveObjectRandomly(object);
+  }, 10000);
+
     }
   </script>
 </body>
