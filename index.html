@@ -101,8 +101,6 @@
     <div class="moving-object object2" onclick="window.open('https://www.youtube.com/watch?v=8tqJx86xQJQ', '_blank')">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 2">
     </div>
-
-    <!-- Additional objects -->
     <div class="moving-object object3" onclick="window.open('https://example.com', '_blank')">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 3">
     </div>
@@ -141,7 +139,7 @@
     };
 
     function moveObjectRandomly(object) {
-  const boundary = 500; // Set your desired boundary
+  const boundary = -500; // Set your desired boundary
   const maxX = window.innerWidth - object.clientWidth - boundary;
   const maxY = window.innerHeight - object.clientHeight - boundary;
 
