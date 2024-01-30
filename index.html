@@ -15,31 +15,44 @@
       height: 100vh; /* Set the body to fill the viewport height */
     }
 
-    div#a {
+    .square {
       width: 100px;
       height: 100px;
-      border: 4px solid black;
+      border: 3px solid black;
       position: absolute;
+      transition: transform 1s ease-in-out;
+    }
+
+    #a {
+      top: 50px;
+      left: 50px;
+    }
+
+    #b {
+      top: 150px;
+      left: 150px;
     }
   </style>
 </head>
 
 <body>
 
-  <div id='a'></div>
+  <div id='a' class="square"></div>
+  <div id='b' class="square"></div>
 
   <script>
-    function RandomObjectMover(obj, container) {
+    function RandomObjectMover(obj, container, delay) {
       this.$object = obj;
       this.$container = container;
       this.container_is_window = container === window;
-      this.pixels_per_second = 100;
+      this.pixels_per_second = 30;
       this.current_position = {
         x: 0,
         y: 0
       };
       this.is_running = false;
       this.boundEvent = this._moveOnce.bind(this);
+      this.delay = delay || 1.5; // default delay is 0
     }
 
     RandomObjectMover.prototype.setSpeed = function (pxPerSec) {
@@ -82,8 +95,8 @@
     RandomObjectMover.prototype._moveOnce = function () {
       var next = this._generateNewPosition();
       var delta = this._calcDelta(this.current_position, next);
-      var speed = Math.round((delta / this.pixels_per_second) * 100) / 100;
-      this.$object.style.transition = 'transform ' + speed + 's ease-out';
+      var speed = Math.round((delta / this.pixels_per_second) * 200) / 200;
+      this.$object.style.transition = 'transform ' + speed + 's ease-in-out';
       this.$object.style.transform = 'translate3d(' + next.x + 'px, ' + next.y + 'px, 0)';
       this.current_position = next;
     };
@@ -95,8 +108,10 @@
       this.$object.style.willChange = 'transform';
       this.$object.style.pointerEvents = 'auto';
       this.$object.addEventListener('transitionend', this.boundEvent);
-      this._moveOnce();
-      this.is_running = true;
+      setTimeout(() => {
+        this._moveOnce();
+        this.is_running = true;
+      }, this.delay);
     }
 
     RandomObjectMover.prototype.stop = function () {
@@ -108,9 +123,11 @@
     }
 
     var x = new RandomObjectMover(document.getElementById('a'), window);
+    var y = new RandomObjectMover(document.getElementById('b'), window, 2500); // delay
 
-    // Start the animation automatically
+    // Start the animations automatically
     x.start();
+    y.start();
   </script>
 
 </body>
