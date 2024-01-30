@@ -10,30 +10,32 @@
     }
 
     .background-container {
-  background-image: url('https://raw.githubusercontent.com/EllenGArt/Home/main/images/hidman%20edited.jpg'); 
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100vw; /* Set width to 100% of viewport width */
-  height: 100vh; /* Set height to 100% of viewport height */
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+      background-image: url('https://raw.githubusercontent.com/EllenGArt/Home/main/images/hidman%20edited.jpg'); 
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 100vw; /* Set width to 100% of viewport width */
+      height: 100vh; /* Set height to 100% of viewport height */
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
 
     .objects-container {
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* Four columns */
-      grid-template-rows: repeat(3, 1fr); /* Three rows */
+      grid-template-columns: repeat(3, 1fr); /* Three columns */
+      grid-template-rows: repeat(2, 1fr); /* Two rows */
       grid-gap: 10px; /* Adjust the gap between objects */
     }
 
     .moving-object {
-      cursor: pointer;
+      cursor: grab;
       user-select: none;
       user-drag: none;
       transform-origin: top left;
       z-index: 1;
       transition: transform 10s ease-out;
+      width: 100%;
+      height: 100%;
     }
 
     .object1 {
@@ -46,36 +48,26 @@
       grid-row: 1; /* Adjust the starting row for object 2 */
     }
 
+    /* Additional objects */
     .object3 {
       grid-column: 3;
       grid-row: 1;
     }
 
     .object4 {
-      grid-column: 4;
-      grid-row: 1;
-    }
-
-    .object5 {
       grid-column: 1;
       grid-row: 2;
     }
 
-    .object6 {
+    .object5 {
       grid-column: 2;
       grid-row: 2;
     }
 
-    .object7 {
+    .object6 {
       grid-column: 3;
       grid-row: 2;
     }
-
-    .object8 {
-      grid-column: 4;
-      grid-row: 2;
-    }
-
   </style>
   <title>Ellen's Test Page</title>
 </head>
@@ -84,29 +76,25 @@
   <div class="background-container"></div>
   
   <div class="objects-container">
-    <div class="moving-object object1" onclick="window.open('https://www.youtube.com/watch?v=fueRUi5AWWQ', '_blank')">
+    <div class="moving-object object1" draggable="true" ondragstart="drag(event)">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 1">
     </div>
-    <div class="moving-object object2" onclick="window.open('https://www.youtube.com/watch?v=8tqJx86xQJQ', '_blank')">
+    <div class="moving-object object2" draggable="true" ondragstart="drag(event)">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 2">
     </div>
-    <div class="moving-object object3" onclick="window.open('https://example.com', '_blank')">
+
+    <!-- Additional objects -->
+    <div class="moving-object object3" draggable="true" ondragstart="drag(event)">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 3">
     </div>
-    <div class="moving-object object4" onclick="window.open('https://example.com', '_blank')">
+    <div class="moving-object object4" draggable="true" ondragstart="drag(event)">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 4">
     </div>
-    <div class="moving-object object5" onclick="window.open('https://example.com', '_blank')">
+    <div class="moving-object object5" draggable="true" ondragstart="drag(event)">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 5">
     </div>
-    <div class="moving-object object6" onclick="window.open('https://example.com', '_blank')">
+    <div class="moving-object object6" draggable="true" ondragstart="drag(event)">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 6">
-    </div>
-    <div class="moving-object object7" onclick="window.open('https://example.com', '_blank')">
-      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 7">
-    </div>
-    <div class="moving-object object8" onclick="window.open('https://example.com', '_blank')">
-      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 8">
     </div>
   </div>
 
@@ -117,31 +105,35 @@
       objects.forEach((object, index) => {
         setTimeout(() => {
           moveObjectRandomly(object);
-        }, index * 6053); // Adjust the delay for each object
+        }, index * 2053); // Adjust the delay for each object
       });
     };
 
     function moveObjectRandomly(object) {
-  const boundary = -500; // Set your desired boundary
-  const maxX = window.innerWidth - object.clientWidth - boundary;
-  const maxY = window.innerHeight - object.clientHeight - boundary;
+      const boundary = 100; // Set your desired boundary
+      const maxX = window.innerWidth - object.offsetWidth - boundary;
+      const maxY = window.innerHeight - object.offsetHeight - boundary;
 
-  const randomX = Math.random();
-  const randomY = Math.random();
+      const randomX = Math.random();
+      const randomY = Math.random();
 
-  const newX = randomX * maxX + boundary / 2;
-  const newY = randomY * maxY + boundary / 2;
+      const newX = randomX * maxX + boundary / 2;
+      const newY = randomY * maxY + boundary / 2;
 
-  // Ensure the object stays within the viewport boundaries
-  const boundedX = Math.min(Math.max(newX, boundary / 2), maxX);
-  const boundedY = Math.min(Math.max(newY, boundary / 2), maxY);
+      // Ensure the object stays within the viewport boundaries
+      const boundedX = Math.min(Math.max(newX, boundary / 2), maxX);
+      const boundedY = Math.min(Math.max(newY, boundary / 2), maxY);
 
-  object.style.transform = `translate(${boundedX}px, ${boundedY}px)`;
+      object.style.transform = `translate(${boundedX}px, ${boundedY}px)`;
 
-  setTimeout(() => {
-    moveObjectRandomly(object);
-  }, 10000); // Adjust the duration for each object
-}
+      setTimeout(() => {
+        moveObjectRandomly(object);
+      }, 10000); // Adjust the duration for each object
+    }
+
+    function drag(event) {
+      event.dataTransfer.setData('text', event.target.innerText);
+    }
   </script>
 </body>
 </html>
