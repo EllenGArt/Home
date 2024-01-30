@@ -1,95 +1,118 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
-      overflow: hidden;
-    }
-
-    .background-container {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: url('https://raw.githubusercontent.com/EllenGArt/Home/main/images/hidman%20edited.jpg');
+      padding: 0;
+      background-image: url('https://github.com/EllenGArt/Home/blob/main/images/hidman%20edited.jpg?raw=true');
       background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
+      height: 100vh; /* Set the body to fill the viewport height */
     }
 
-    .objects-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 10px;
-    }
-
-    .moving-object {
-      cursor: pointer;
-      user-select: none;
-      user-drag: none;
-      transform-origin: top left;
-      z-index: 1;
-      transition: transform 10s ease-out;
+    div#a {
+      width: 100px;
+      height: 100px;
+      border: 4px solid black;
       position: absolute;
-    }
-
-    .object1 {
-      left: 10%;  /* Adjust the starting position for object 1 */
-      top: 20%;   /* Adjust the starting position for object 1 */
-    }
-
-    .object2 {
-      left: 50%;  /* Adjust the starting position for object 2 */
-      top: 20%;   /* Adjust the starting position for object 2 */
     }
   </style>
-  <title>Ellen's Test Page</title>
 </head>
+
 <body>
 
-  <div class="background-container"></div>
-
-  <div class="objects-container">
-    <div class="moving-object object1">
-      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" style="width: 300px;" alt="Image 1">
-    </div>
-
-    <div class="moving-object object2">
-      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" style="width: 300px;" alt="Image 2">
-    </div>
-  </div>
+  <div id='a'></div>
 
   <script>
-    const objects = document.querySelectorAll('.moving-object');
+    function RandomObjectMover(obj, container) {
+      this.$object = obj;
+      this.$container = container;
+      this.container_is_window = container === window;
+      this.pixels_per_second = 100;
+      this.current_position = {
+        x: 0,
+        y: 0
+      };
+      this.is_running = false;
+      this.boundEvent = this._moveOnce.bind(this);
+    }
 
-    window.onload = function() {
-      objects.forEach((object, index) => {
-        setTimeout(() => {
-          moveObjectRandomly(object);
-        }, index * 2053);
-      });
+    RandomObjectMover.prototype.setSpeed = function (pxPerSec) {
+      this.pixels_per_second = pxPerSec;
+    }
+
+    RandomObjectMover.prototype._getContainerDimensions = function () {
+      if (this.$container === window) {
+        return {
+          'height': this.$container.innerHeight,
+          'width': this.$container.innerWidth
+        };
+      } else {
+        return {
+          'height': this.$container.clientHeight,
+          'width': this.$container.clientWidth
+        };
+      }
+    }
+
+    RandomObjectMover.prototype._generateNewPosition = function () {
+      var containerSize = this._getContainerDimensions();
+      var availableHeight = containerSize.height - this.$object.clientHeight;
+      var availableWidth = containerSize.width - this.$object.clientHeight;
+      var y = Math.floor(Math.random() * availableHeight);
+      var x = Math.floor(Math.random() * availableWidth);
+      return {
+        x: x,
+        y: y
+      };
+    }
+
+    RandomObjectMover.prototype._calcDelta = function (a, b) {
+      var dx = a.x - b.x;
+      var dy = a.y - b.y;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      return dist;
+    }
+
+    RandomObjectMover.prototype._moveOnce = function () {
+      var next = this._generateNewPosition();
+      var delta = this._calcDelta(this.current_position, next);
+      var speed = Math.round((delta / this.pixels_per_second) * 100) / 100;
+      this.$object.style.transition = 'transform ' + speed + 's ease-out';
+      this.$object.style.transform = 'translate3d(' + next.x + 'px, ' + next.y + 'px, 0)';
+      this.current_position = next;
     };
 
-    function moveObjectRandomly(object) {
-      const boundary = 100;
-
-      const maxX = window.innerWidth - object.clientWidth - boundary;
-      const maxY = window.innerHeight - object.clientHeight - boundary;
-
-      const randomX = Math.random();
-      const randomY = Math.random();
-
-      const newX = randomX * maxX + boundary / 2;
-      const newY = randomY * maxY + boundary / 2;
-
-      object.style.transform = `translate(${newX}px, ${newY}px)`;
-
-      setTimeout(() => {
-        moveObjectRandomly(object);
-      }, 10000);
+    RandomObjectMover.prototype.start = function () {
+      if (this.is_running) {
+        return;
+      }
+      this.$object.style.willChange = 'transform';
+      this.$object.style.pointerEvents = 'auto';
+      this.$object.addEventListener('transitionend', this.boundEvent);
+      this._moveOnce();
+      this.is_running = true;
     }
+
+    RandomObjectMover.prototype.stop = function () {
+      if (!this.is_running) {
+        return;
+      }
+      this.$object.removeEventListener('transitionend', this.boundEvent);
+      this.is_running = false;
+    }
+
+    var x = new RandomObjectMover(document.getElementById('a'), window);
+
+    // Start the animation automatically
+    x.start();
   </script>
+
 </body>
+
 </html>
