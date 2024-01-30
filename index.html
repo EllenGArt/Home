@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,22 +7,22 @@
   <style>
     body {
       margin: 0;
-      overflow: hidden; /* Prevent scrollbars */
+      overflow: hidden;
     }
 
     .background-container {
       position: absolute;
       width: 100%;
       height: 100%;
-      background-image: url('https://raw.githubusercontent.com/EllenGArt/Home/main/images/hidman%20edited.jpg'); 
+      background-image: url('https://raw.githubusercontent.com/EllenGArt/Home/main/images/hidman%20edited.jpg');
       background-size: cover;
       background-repeat: no-repeat;
     }
 
     .objects-container {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* Two columns */
-      grid-gap: 10px; /* Adjust the gap between objects */
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
     }
 
     .moving-object {
@@ -31,16 +32,17 @@
       transform-origin: top left;
       z-index: 1;
       transition: transform 10s ease-out;
+      position: absolute;
     }
 
     .object1 {
-      grid-column: 1; /* Adjust the starting column for object 1 */
-      grid-row: 1; /* Adjust the starting row for object 1 */
+      left: 10%;  /* Adjust the starting position for object 1 */
+      top: 20%;   /* Adjust the starting position for object 1 */
     }
 
     .object2 {
-      grid-column: 2; 
-      grid-row: 1; 
+      left: 50%;  /* Adjust the starting position for object 2 */
+      top: 20%;   /* Adjust the starting position for object 2 */
     }
   </style>
   <title>Ellen's Test Page</title>
@@ -48,15 +50,15 @@
 <body>
 
   <div class="background-container"></div>
-  
-  <div class="objects-container">
-    <div class="moving-object object1"> 
-      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 1">
-      </div> 
 
-    <div class="moving-object object2"> 
-      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 2">
-    </div> 
+  <div class="objects-container">
+    <div class="moving-object object1">
+      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" style="width: 300px;" alt="Image 1">
+    </div>
+
+    <div class="moving-object object2">
+      <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" style="width: 300px;" alt="Image 2">
+    </div>
   </div>
 
   <script>
@@ -66,12 +68,12 @@
       objects.forEach((object, index) => {
         setTimeout(() => {
           moveObjectRandomly(object);
-        }, index * 2053); // Adjust the delay for each object
+        }, index * 2053);
       });
     };
 
     function moveObjectRandomly(object) {
-      const boundary = 100; // Set your desired boundary
+      const boundary = 100;
 
       const maxX = window.innerWidth - object.clientWidth - boundary;
       const maxY = window.innerHeight - object.clientHeight - boundary;
