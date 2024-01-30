@@ -13,6 +13,7 @@
       background-position: center;
       background-repeat: no-repeat;
       height: 100vh; /* Set the body to fill the viewport height */
+      overflow: hidden;
     }
 
     .square {
@@ -23,15 +24,12 @@
       transition: transform 1s ease-in-out;
     }
 
-    #a {
-      top: 50px;
-      left: 50px;
-    }
-
-    #b {
-      top: 150px;
-      left: 150px;
-    }
+    #a { top: 50px; left: 50px; }
+    #b { top: 50px; left: 200px; }
+    #c { top: 50px; left: 350px; }
+    #d { top: 200px; left: 50px; }
+    #e { top: 200px; left: 200px; }
+    #f { top: 200px; left: 350px; }
   </style>
 </head>
 
@@ -39,6 +37,10 @@
 
   <div id='a' class="square"></div>
   <div id='b' class="square"></div>
+  <div id='c' class="square"></div>
+  <div id='d' class="square"></div>
+  <div id='e' class="square"></div>
+  <div id='f' class="square"></div>
 
   <script>
     function RandomObjectMover(obj, container, delay) {
@@ -52,7 +54,7 @@
       };
       this.is_running = false;
       this.boundEvent = this._moveOnce.bind(this);
-      this.delay = delay || 1.5; // default delay is 0
+      this.delay = delay || 1.3; // default delay is 0
     }
 
     RandomObjectMover.prototype.setSpeed = function (pxPerSec) {
@@ -122,12 +124,21 @@
       this.is_running = false;
     }
 
-    var x = new RandomObjectMover(document.getElementById('a'), window);
-    var y = new RandomObjectMover(document.getElementById('b'), window, 2500); // delay
+var a = new RandomObjectMover(document.getElementById('a'), window, 500); 
+var b = new RandomObjectMover(document.getElementById('b'), window, 1000); 
+var c = new RandomObjectMover(document.getElementById('c'), window, 1500); 
+var d = new RandomObjectMover(document.getElementById('d'), window, 2000); 
+var e = new RandomObjectMover(document.getElementById('e'), window, 2500); 
+var f = new RandomObjectMover(document.getElementById('f'), window, 3000); 
+
 
     // Start the animations automatically
-    x.start();
-    y.start();
+    a.start();
+    b.start();
+    c.start();
+    d.start();
+    e.start();
+    f.start();
   </script>
 
 </body>
