@@ -31,6 +31,9 @@
     #d { top: 100px; left: 50px; }
     #e { top: 100px; left: 50px; }
     #f { top: 100px; left: 50px; }
+    #g { top: 100px; left: 50px; }
+    #h { top: 100px; left: 50px; }
+    #i { top: 100px; left: 50px; }
   </style>
 </head>
 
@@ -42,6 +45,9 @@
   <div id='d' class="square"></div>
   <div id='e' class="square"></div>
   <div id='f' class="square"></div>
+  <div id='g' class="square"></div>
+  <div id='h' class="square"></div> 
+  <div id='i' class="square"></div>
 
   <script>
     function RandomObjectMover(obj, container, delay) {
@@ -125,12 +131,15 @@
       this.is_running = false;
     }
 
-    var a = new RandomObjectMover(document.getElementById('a'), window, 500); 
-    var b = new RandomObjectMover(document.getElementById('b'), window, 1000); 
-    var c = new RandomObjectMover(document.getElementById('c'), window, 1500); 
-    var d = new RandomObjectMover(document.getElementById('d'), window, 2000); 
-    var e = new RandomObjectMover(document.getElementById('e'), window, 2500); 
-    var f = new RandomObjectMover(document.getElementById('f'), window, 3000); 
+    var a = new RandomObjectMover(document.getElementById('a'), window, 2000); 
+    var b = new RandomObjectMover(document.getElementById('b'), window, 3053); 
+    var c = new RandomObjectMover(document.getElementById('c'), window, 4005); 
+    var d = new RandomObjectMover(document.getElementById('d'), window, 5057); 
+    var e = new RandomObjectMover(document.getElementById('e'), window, 6509); 
+    var f = new RandomObjectMover(document.getElementById('f'), window, 7051); 
+    var g = new RandomObjectMover(document.getElementById('d'), window, 8057); 
+    var h = new RandomObjectMover(document.getElementById('e'), window, 9509); 
+    var i = new RandomObjectMover(document.getElementById('f'), window, 10051); 
 
     // Start the animations automatically
     a.start();
