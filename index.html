@@ -36,6 +36,7 @@
       transition: transform 10s ease-out;
       width: 100%;
       height: 100%;
+      position: relative; /* Ensure the initial position is relative */
     }
 
     .object1 {
@@ -76,24 +77,24 @@
   <div class="background-container"></div>
   
   <div class="objects-container">
-    <div class="moving-object object1" draggable="true" ondragstart="drag(event)">
+    <div class="moving-object object1" id="obj1" draggable="true" ondragstart="drag(event, 'obj1')">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 1">
     </div>
-    <div class="moving-object object2" draggable="true" ondragstart="drag(event)">
+    <div class="moving-object object2" id="obj2" draggable="true" ondragstart="drag(event, 'obj2')">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 2">
     </div>
 
     <!-- Additional objects -->
-    <div class="moving-object object3" draggable="true" ondragstart="drag(event)">
+    <div class="moving-object object3" id="obj3" draggable="true" ondragstart="drag(event, 'obj3')">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 3">
     </div>
-    <div class="moving-object object4" draggable="true" ondragstart="drag(event)">
+    <div class="moving-object object4" id="obj4" draggable="true" ondragstart="drag(event, 'obj4')">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 4">
     </div>
-    <div class="moving-object object5" draggable="true" ondragstart="drag(event)">
+    <div class="moving-object object5" id="obj5" draggable="true" ondragstart="drag(event, 'obj5')">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 5">
     </div>
-    <div class="moving-object object6" draggable="true" ondragstart="drag(event)">
+    <div class="moving-object object6" id="obj6" draggable="true" ondragstart="drag(event, 'obj6')">
       <img src="https://raw.githubusercontent.com/EllenGArt/Home/main/images/sqaeur.png" alt="Image 6">
     </div>
   </div>
@@ -103,9 +104,7 @@
 
     window.onload = function() {
       objects.forEach((object, index) => {
-        setTimeout(() => {
-          moveObjectRandomly(object);
-        }, index * 2053); // Adjust the delay for each object
+        moveObjectRandomly(object);
       });
     };
 
@@ -125,14 +124,10 @@
       const boundedY = Math.min(Math.max(newY, boundary / 2), maxY);
 
       object.style.transform = `translate(${boundedX}px, ${boundedY}px)`;
-
-      setTimeout(() => {
-        moveObjectRandomly(object);
-      }, 10000); // Adjust the duration for each object
     }
 
-    function drag(event) {
-      event.dataTransfer.setData('text', event.target.innerText);
+    function drag(event, objectId) {
+      event.dataTransfer.setData('text', objectId);
     }
   </script>
 </body>
