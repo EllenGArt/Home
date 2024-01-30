@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,11 +26,11 @@
     }
 
     #a { top: 100px; left: 50px; }
-    #b { top: 100px; left: 600px; }
-    #c { top: 100px; left: 1050px; }
+    #b { top: 100px; left: 300px; }
+    #c { top: 100px; left: 550px; }
     #d { top: 400px; left: 50px; }
-    #e { top: 400px; left: 600px; }
-    #f { top: 400px; left: 1050px; }
+    #e { top: 400px; left: 300px; }
+    #f { top: 400px; left: 550px; }
   </style>
 </head>
 
@@ -78,9 +79,9 @@
     RandomObjectMover.prototype._generateNewPosition = function () {
       var containerSize = this._getContainerDimensions();
       var availableHeight = containerSize.height - this.$object.clientHeight;
-      var availableWidth = containerSize.width - this.$object.clientHeight;
-      var y = Math.floor(Math.random() * availableHeight);
-      var x = Math.floor(Math.random() * availableWidth);
+      var availableWidth = containerSize.width - this.$object.clientWidth;
+      var y = Math.floor(Math.random() * (availableHeight - 100)); // Adjusted to keep it away from the edges
+      var x = Math.floor(Math.random() * (availableWidth - 100));  // Adjusted to keep it away from the edges
       return {
         x: x,
         y: y
@@ -124,13 +125,12 @@
       this.is_running = false;
     }
 
-var a = new RandomObjectMover(document.getElementById('a'), window, 500); 
-var b = new RandomObjectMover(document.getElementById('b'), window, 1000); 
-var c = new RandomObjectMover(document.getElementById('c'), window, 1500); 
-var d = new RandomObjectMover(document.getElementById('d'), window, 2000); 
-var e = new RandomObjectMover(document.getElementById('e'), window, 2500); 
-var f = new RandomObjectMover(document.getElementById('f'), window, 3000); 
-
+    var a = new RandomObjectMover(document.getElementById('a'), window, 500); 
+    var b = new RandomObjectMover(document.getElementById('b'), window, 1000); 
+    var c = new RandomObjectMover(document.getElementById('c'), window, 1500); 
+    var d = new RandomObjectMover(document.getElementById('d'), window, 2000); 
+    var e = new RandomObjectMover(document.getElementById('e'), window, 2500); 
+    var f = new RandomObjectMover(document.getElementById('f'), window, 3000); 
 
     // Start the animations automatically
     a.start();
